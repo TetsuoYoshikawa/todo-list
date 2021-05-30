@@ -30,7 +30,7 @@ export default {
   },
   mounted() {
     axios
-    .get("/api/todos")
+    .get("https://eloquent-feynman-a514d4.netlify.app/api/todos")
     .then(response => (
       this.contents = response.data.data
       ))
@@ -41,13 +41,13 @@ export default {
   methods: {
     add() {
       axios
-      .post("/api/todos", {
+      .post("https://eloquent-feynman-a514d4.netlify.app/api/todos", {
         content: this.content
       })
       .then(response => {
         console.log(response);
       axios
-      .get("/api/todos")
+      .get("https://eloquent-feynman-a514d4.netlify.app/api/todos")
       .then(response => (this.contents = response.data.data));
       })
       .catch(error => {
@@ -57,13 +57,13 @@ export default {
     },
     update(id,content) {
       axios
-      .put("/api/todos/" + id, {
+      .put("https://eloquent-feynman-a514d4.netlify.app/api/todos/" + id, {
         content: content
       })
       .then(response => {
         console.log(response);
       axios
-      .get("api/todos")
+      .get("https://eloquent-feynman-a514d4.netlify.app/api/todos")
       .then(response => (this.contents = response.data.data));
       })
       .catch(error => {
@@ -72,11 +72,11 @@ export default {
     },
     destroy(id) {
       axios
-      .delete("/api/todos" + id)
+      .delete("https://eloquent-feynman-a514d4.netlify.app/api/todos" + id)
       .then(response => {
         console.log(response);
       axios
-      .get("/api/todos")
+      .get("https://eloquent-feynman-a514d4.netlify.app/api/todos")
       .then(response => (this.contents = response.data.data));
       })
       .catch(error => {
