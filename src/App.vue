@@ -30,7 +30,7 @@ export default {
   },
   mounted() {
     axios
-    .get("https://boiling-lake-04233.herokuapp.com/")
+    .get("https://boiling-lake-04233.herokuapp.com/api/todos")
     .then(response => (
       this.contents = response.data.data
       ))
@@ -41,13 +41,13 @@ export default {
   methods: {
     add() {
       axios
-      .post("https://boiling-lake-04233.herokuapp.com/", {
+      .post("https://boiling-lake-04233.herokuapp.com/api/todos", {
         content: this.content
       })
       .then(response => {
         console.log(response);
       axios
-      .get("https://boiling-lake-04233.herokuapp.com/")
+      .get("https://boiling-lake-04233.herokuapp.com/api/todos")
       .then(response => (this.contents = response.data.data));
       })
       .catch(error => {
@@ -57,13 +57,13 @@ export default {
     },
     update(id,content) {
       axios
-      .put("https://boiling-lake-04233.herokuapp.com/" + id, {
+      .put("https://boiling-lake-04233.herokuapp.com/api/todos/" + id, {
         content: content
       })
       .then(response => {
         console.log(response);
       axios
-      .get("https://boiling-lake-04233.herokuapp.com/")
+      .get("https://boiling-lake-04233.herokuapp.com/api/todos")
       .then(response => (this.contents = response.data.data));
       })
       .catch(error => {
@@ -72,11 +72,11 @@ export default {
     },
     destroy(id) {
       axios
-      .delete("https://boiling-lake-04233.herokuapp.com/todos" + id)
+      .delete("https://boiling-lake-04233.herokuapp.com/api/todos" + id)
       .then(response => {
         console.log(response);
       axios
-      .get("https://boiling-lake-04233.herokuapp.com/todos")
+      .get("https://boiling-lake-04233.herokuapp.com/api/todos")
       .then(response => (this.contents = response.data.data));
       })
       .catch(error => {
