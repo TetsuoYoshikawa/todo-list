@@ -5,13 +5,13 @@
       <div class="form">
         <div class="new">
           <input type="text" v-model="content">
-          <button class="add" @click="add">追加</button>
+          <button class="add" @click="insertTodo">追加</button>
         </div>
-        <div class="lists" v-for="(item, index) in contents" :key="index">
+        <div class="lists" v-for="item in contents" :key="item.id">
           <input type="text" v-model="item.content">
           <div class="button">
-            <button class="update" @click="update(item.id, item.content)">更新</button>
-            <button class="delete" @click="destroy(item.id)">削除</button>
+            <button class="update" @click="updateTodo(item.id, item.content)">更新</button>
+            <button class="delete" @click="deleteTodo(item.id)">削除</button>
           </div>
         </div>
       </div>
@@ -28,83 +28,37 @@ export default {
       contents: [],
     };
   },
-  mounted() {
-    axios
-    .get("https://quiet-oasis-59544.herokuapp.com/api/todos")
-    .then(response => (
-      this.contents = response.data.data
-      ))
-    .catch(error => {
-    alert(error);
-    });
-  },
   methods: {
-    add() {
-      axios
-      .post(https://quiet-oasis-59544.herokuapp.com/api/todos", {
-        content: this.content
-      })
-      .then(response => {
-        console.log(response);
-      axios
-      .get("https://quiet-oasis-59544.herokuapp.com/api/todos")
-      .then(response => (this.contents = response.data.data));
-      })
-      .catch(error => {
-        alert(error);
-      });
-      this.content = ""
+    async getTodo() {
+      const resData = await axios.get("https://quiet-oasis-59544.herokuapp.com/api/todos");
+      this.contacts = resData.data.data;
     },
-    update(id,content) {
-      axios
-      .put("https://quiet-oasis-59544.herokuapp.com/api/todos/" + id, {
-        content: content
-      })
-      .then(response => {
-        console.log(response);
-      axios
-      .get("https://quiet-oasis-59544.herokuapp.com/api/todos")
-      .then(response => (this.contents = response.data.data));
-      })
-      .catch(error => {
-        alert(error);
-      });
+    async insertTodo() {
+      const sendData = {
+        todo: this.newTodo,
+      };
+      await axios.post("https://quiet-oasis-59544.herokuapp.com/api/todos", sendData);
+      await this.getTodo();
     },
-    destroy(id) {
-      axios
-      .delete("https://quiet-oasis-59544.herokuapp.com/api/todos/" + id)
-      .then(response => {
-        console.log(response);
-      axios
-      .get("https://quiet-oasis-59544.herokuapp.com/api/todos")
-      .then(response => (this.contents = response.data.data));
-      })
-      .catch(error => {
-        alert(error);
-      });
-    }
-  }
-}
+    async updateTodo(id, todo) {
+      const sendData = {
+        todo:todo,
+      };
+      await axios.put("https://quiet-oasis-59544.herokuapp.com/api/todos/" + id, sendData);
+      await this.getTodo();
+    },
+    async deleteTodo(id) {
+      await axios.delete("https://quiet-oasis-59544.herokuapp.com/api/todos/" + id);
+      await this.getTodo();
+    },
+  },
+  created() {
+    this.getTodo();
+  },
+};
+  
 </script>
     
-<style>
-table,
-td,
-th {
-  border: 1px solid #000;
-  border-collapse: collapse;
-  text-align: center;
-}
-td,
-th {
-  padding: 5px;
-}
-th {
-  background: #f0e6cc;
-}
-</style>
-
-
 <style>
 html, body, div, span, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
