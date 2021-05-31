@@ -32,17 +32,18 @@ export default {
     async getTodo() {
       const resData = await axios.get("https://quiet-oasis-59544.herokuapp.com/api/todos");
       this.contacts = resData.data.data;
+      this.content = "";
     },
     async insertTodo() {
       const sendData = {
-        todo: this.newTodo,
+        content: this.content,
       };
       await axios.post("https://quiet-oasis-59544.herokuapp.com/api/todos", sendData);
       await this.getTodo();
     },
-    async updateTodo(id, todo) {
+    async updateTodo(id, content) {
       const sendData = {
-        todo:todo,
+        content:content,
       };
       await axios.put("https://quiet-oasis-59544.herokuapp.com/api/todos/" + id, sendData);
       await this.getTodo();
