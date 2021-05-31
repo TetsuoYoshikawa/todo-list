@@ -31,7 +31,7 @@ export default {
   methods: {
     async getTodo() {
       const resData = await axios.get("https://quiet-oasis-59544.herokuapp.com/api/todos");
-      this.contacts = resData.data.data;
+      this.contents = resData.data.data;
       this.content = "";
     },
     async insertTodo() {
