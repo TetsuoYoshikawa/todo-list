@@ -30,7 +30,7 @@ export default {
   },
   mounted() {
     axios
-    .get("https://eloquent-feynman-a514d4.netlify.app/api/todos")
+    .get("https://quiet-oasis-59544.herokuapp.com/api/todos")
     .then(response => (
       this.contents = response.data.data
       ))
@@ -41,13 +41,13 @@ export default {
   methods: {
     add() {
       axios
-      .post("https://eloquent-feynman-a514d4.netlify.app/api/todos", {
+      .post(https://quiet-oasis-59544.herokuapp.com/api/todos", {
         content: this.content
       })
       .then(response => {
         console.log(response);
       axios
-      .get("https://eloquent-feynman-a514d4.netlify.app/api/todos")
+      .get("https://quiet-oasis-59544.herokuapp.com/api/todos")
       .then(response => (this.contents = response.data.data));
       })
       .catch(error => {
@@ -57,13 +57,13 @@ export default {
     },
     update(id,content) {
       axios
-      .put("https://eloquent-feynman-a514d4.netlify.app/api/todos/" + id, {
+      .put("https://quiet-oasis-59544.herokuapp.com/api/todos/" + id, {
         content: content
       })
       .then(response => {
         console.log(response);
       axios
-      .get("https://eloquent-feynman-a514d4.netlify.app/api/todos")
+      .get("https://quiet-oasis-59544.herokuapp.com/api/todos")
       .then(response => (this.contents = response.data.data));
       })
       .catch(error => {
@@ -72,11 +72,11 @@ export default {
     },
     destroy(id) {
       axios
-      .delete("https://eloquent-feynman-a514d4.netlify.app/api/todos/" + id)
+      .delete("https://quiet-oasis-59544.herokuapp.com/api/todos/" + id)
       .then(response => {
         console.log(response);
       axios
-      .get("https://eloquent-feynman-a514d4.netlify.app/api/todos")
+      .get("https://quiet-oasis-59544.herokuapp.com/api/todos")
       .then(response => (this.contents = response.data.data));
       })
       .catch(error => {
