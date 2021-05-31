@@ -72,7 +72,7 @@ export default {
     },
     destroy(id) {
       axios
-      .delete("https://eloquent-feynman-a514d4.netlify.app/api/todos" + id)
+      .delete("https://eloquent-feynman-a514d4.netlify.app/api/todos/" + id)
       .then(response => {
         console.log(response);
       axios
